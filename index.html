@@ -111,6 +111,19 @@
   .blink{animation:bl 1s steps(1) infinite}
   @keyframes bl{50%{opacity:.25}}
   a{color:#000080}
+  .manual-bar{cursor:pointer;padding:5px 8px;font-weight:bold;font-size:11px;letter-spacing:1px;user-select:none}
+  .manual-bar:hover{background:var(--face2)}
+  #helpBody{padding:10px;font-size:11px;line-height:1.55;max-height:62vh;overflow:auto}
+  .help h3{font-size:11px;margin:12px 0 4px;letter-spacing:1px;border-bottom:1px solid var(--sh);padding-bottom:2px;text-transform:uppercase}
+  .help h3:first-child{margin-top:0}
+  .help p{margin:4px 0}
+  .help ol,.help ul{margin:4px 0 4px 18px;padding:0}
+  .help li{margin:2px 0}
+  .help code{background:#ddd;padding:0 3px;border:1px solid var(--sh)}
+  .help table{border-collapse:collapse;width:100%;font-size:10.5px;margin:4px 0}
+  .help td,.help th{border:1px solid var(--sh);padding:2px 5px;text-align:left;vertical-align:top}
+  .help th{background:var(--face2)}
+  .kbd{display:inline-block;background:var(--face);border:2px solid;border-color:var(--hi) var(--sh2) var(--sh2) var(--hi);padding:0 5px;font-weight:bold}
 </style>
 </head>
 <body>
@@ -123,6 +136,88 @@
     <div class="chrome">
       <h1>PHONETIC FORMANT WEAVER</h1>
       <div class="sub">Language stripped of meaning &rarr; rhythmic CV. Type in the terminal to weave drones. Root gesture required: click <b>[ENGINE]</b> once to unlock audio.</div>
+
+      <div class="bevel-in" style="margin-bottom:8px">
+        <div class="manual-bar" id="manualBar">&#9656; MANUAL / TUTORIAL &mdash; click to open</div>
+        <div id="helpBody" class="help" style="display:none">
+          <h3>1 &middot; What it is</h3>
+          <p>The PFW-11 turns writing into sound. It ignores what words <i>mean</i> and instead treats every letter, number and mark of punctuation as a control signal for a synthesizer. You type or paste text; the machine scans it on a loop and &ldquo;performs&rdquo; it as drones, glides and percussion.</p>
+
+          <h3>2 &middot; Quick start</h3>
+          <ol>
+            <li>Click <span class="kbd">ENGINE</span> once &mdash; browsers require one click before they will make sound.</li>
+            <li>Type letters into the command terminal, or press <span class="kbd">LOAD DEMO TEXT</span>, or hit a preset like <span class="kbd">DEEP DRONE</span>.</li>
+            <li>Set <b>Master</b> to taste and watch the scope, the register and the trigger LEDs respond.</li>
+          </ol>
+
+          <h3>3 &middot; How text becomes sound</h3>
+          <p>Each character is routed to a different synthesis engine by phonetic category:</p>
+          <table>
+            <tr><th>Type</th><th>Keys</th><th>Sound</th></tr>
+            <tr><td>Vowels</td><td>A E I O U Y</td><td>Sustained formant drones &mdash; the &ldquo;voice.&rdquo; Hold a vowel key for a continuous drone.</td></tr>
+            <tr><td>Plosives</td><td>P T K B D G</td><td>Percussive strikes and plucks.</td></tr>
+            <tr><td>Fricatives</td><td>S Z F V H</td><td>Noise textures, hiss, static.</td></tr>
+            <tr><td>Nasals / liquids</td><td>L R M N</td><td>Warble and modulation.</td></tr>
+          </table>
+          <p><b>Digraphs:</b> letter pairs are caught first &mdash; gliding vowels (<code>AY OY OW EY EA OA AU OO EE</code>) slide smoothly from one vowel to the next, and consonant pairs (<code>SH TH CH NG CK PH WH</code>) get their own character.</p>
+          <p><b>Numbers &amp; punctuation:</b> digits <code>0&ndash;9</code> are a drum kit (0 = deep kick &hellip; 9 = crash); punctuation is accents and ticks (<code>!</code> and <code>?</code> loud, <code>.</code> and <code>,</code> soft). Spaces and line breaks are rests, so the rhythm follows the shape of your text.</p>
+          <p><b>Case:</b> UPPERCASE letters <b>shout</b> (louder and grittier); lowercase <b>whispers</b> (soft and pure). Write in mixed case to shape the phrasing.</p>
+
+          <h3>4 &middot; The scan (sequencer)</h3>
+          <p>The entire text loops as an evolving pattern. The 16-cell <b>register</b> is a moving window onto that loop; <b>STEP</b> shows your position in the full buffer. <b>Clock BPM</b> sets the speed, <b>Swing</b> adds groove, and <b>Vary</b> introduces octave jumps, ghost rests and ratchets so no two passes are identical. Press <span class="kbd">Esc</span> to lock the buffer &mdash; existing drones keep playing while you tweak knobs without spawning new layers.</p>
+
+          <h3>5 &middot; Controls</h3>
+          <table>
+            <tr><th>Knob</th><th>Does</th></tr>
+            <tr><td>Master</td><td>Output volume.</td></tr>
+            <tr><td>Clock BPM</td><td>Scan / loop speed.</td></tr>
+            <tr><td>FM Index</td><td>Brightness and metallic edge of the vowel tone.</td></tr>
+            <tr><td>Wavefold</td><td>Harmonic distortion &mdash; louder input folds harder.</td></tr>
+            <tr><td>Feedback</td><td>Routes output back into the FM core. Crank it (with a held vowel) for screaming self-oscillation.</td></tr>
+            <tr><td>Noise Amt</td><td>Level of fricative / noise textures.</td></tr>
+            <tr><td>Grit</td><td>Plosive character: 0 = Speak&amp;Spell ping &rarr; 100 = physical hit (click + inharmonic body).</td></tr>
+            <tr><td>Space</td><td>Reverb amount &mdash; dry room to cavern.</td></tr>
+            <tr><td>Width</td><td>Stereo width.</td></tr>
+            <tr><td>Swing</td><td>Shuffle / groove on the clock.</td></tr>
+            <tr><td>Vary</td><td>Amount of generative variation (octaves, rests, ratchets).</td></tr>
+            <tr><td>Kit Tune</td><td>Pitch the whole drum kit &plusmn;12 semitones.</td></tr>
+          </table>
+
+          <h3>6 &middot; Buttons &amp; toggles</h3>
+          <table>
+            <tr><th>Button</th><th>Does</th></tr>
+            <tr><td>ENGINE</td><td>Start / stop audio.</td></tr>
+            <tr><td>MIC</td><td>Feed your voice in (speech becomes phonemes). May be blocked in the preview &mdash; open the file directly.</td></tr>
+            <tr><td>LOCK <span class="kbd">Esc</span></td><td>Freeze the buffer; drones sustain, no new layers.</td></tr>
+            <tr><td>HIDE <span class="kbd">`</span></td><td>Hide the mouse cursor for distraction-free performance.</td></tr>
+            <tr><td>COARTIC</td><td>Thread the vowels into one continuous, gliding vocal line.</td></tr>
+            <tr><td>#/PUNC</td><td>Numbers &amp; punctuation as percussion (on) or silent rests (off).</td></tr>
+            <tr><td>CASE</td><td>Case dynamics on/off (UPPERCASE shout vs lowercase whisper).</td></tr>
+            <tr><td>KIT</td><td>Cycle the drum kit: Classic &rarr; 808 &rarr; Metal &rarr; Wood.</td></tr>
+            <tr><td>Presets</td><td>Recall a full patch instantly (Deep Drone, Industrial, Choir, Speak&amp;Spell).</td></tr>
+            <tr><td>&#9679; REC</td><td>Record the output; press again to stop and download the take.</td></tr>
+            <tr><td>CLR</td><td>Clear the buffer and silence held drones.</td></tr>
+          </table>
+
+          <h3>7 &middot; Keyboard</h3>
+          <table>
+            <tr><td><b>A&ndash;Z</b></td><td>Phonemes. Hold a vowel to sustain a drone.</td></tr>
+            <tr><td><b>0&ndash;9 &amp; punctuation</b></td><td>Percussion hits.</td></tr>
+            <tr><td><span class="kbd">Esc</span></td><td>Lock / unlock the text buffer.</td></tr>
+            <tr><td><span class="kbd">`</span> backtick</td><td>Hide / show the mouse cursor.</td></tr>
+          </table>
+
+          <h3>8 &middot; Try this</h3>
+          <ul>
+            <li>Paste a poem, hit <b>CHOIR</b>, and turn <b>COARTIC</b> on &mdash; the vowels pour into each other.</li>
+            <li>Type a beat with numbers (<code>0 6 8 6</code>) and cycle <b>KIT</b> while it loops.</li>
+            <li>Write in <b>MiXeD case</b> &mdash; capitals punch, lowercase softens.</li>
+            <li>Loop a plosive line and slowly sweep <b>Grit</b> from 0 to 100.</li>
+            <li>Hold a vowel, then raise <b>Feedback</b> for industrial self-oscillation.</li>
+            <li>Capture a take with <b>&#9679; REC</b> (open the file standalone if recording is blocked in preview).</li>
+          </ul>
+        </div>
+      </div>
 
       <div class="row">
         <!-- LEFT COLUMN ------------------------------------------------->
@@ -986,6 +1081,9 @@ $('btnCase').onclick=()=>{ caseDyn=!caseDyn;
   btnCase.textContent='CASE '+(caseDyn?'●':'○'); btnCase.classList.toggle('on',caseDyn);
   msg(caseDyn?'CASE DYNAMICS ON — UPPERCASE shouts, lowercase whispers.':'CASE DYNAMICS OFF — case ignored (uniform).'); };
 $('btnClear').onclick=()=>{ seq=[]; tokens=[]; step=0; coF1=coF2=null; term.value=''; renderReg(); updateStepReadout(); liveVoices.forEach(v=>v.stop()); liveVoices.clear(); msg('BUFFER CLEARED.'); };
+$('manualBar').onclick=()=>{ const b=$('helpBody'), open=b.style.display==='none';
+  b.style.display=open?'block':'none';
+  manualBar.innerHTML=(open?'&#9662;':'&#9656;')+' MANUAL / TUTORIAL &mdash; click to '+(open?'close':'open'); };
 
 /* sliders */
 function bind(id,vid,key,fn){ const el=$(id),v=$(vid); el.oninput=()=>{ const n=+el.value; v.textContent=n; fn(n); }; }
